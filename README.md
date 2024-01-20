@@ -1,6 +1,10 @@
 # linkedin_crawler
 Linkedin crawler to collect user profiles data, such as name, organization and current role.
 
+Keep in mind that Linkedin changes its layout from time to time so the extension may stop working and a new extension version must be released.
+
+Let me know if it happens to you and you if you have any ideas to improve this tool. =)
+
 ## Install
 The extension is not published yet, so to install it you have to access 'Manage extensions' and activate 'Developper mode'. 
 Once activated, load the directory with the files in this project and enable the extension.
