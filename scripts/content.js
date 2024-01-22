@@ -30,37 +30,14 @@ function getNameElementSmall(section)
 	
 	return h1;
 }
-function getNameElementBig(sections)
+function getNameElementBig(section)
 {
-	let wordMatchRegExp = /artdeco-card EpYoKBnmDyhtoKVRsPnABnILWmuWoUHXYKw/g; // Regular expression
-	let len = sections.length;
+	let len;
 	let i,text;
 	
-	for(i = 0; i<len; i++){
-			text = sections[i].className;
-			if(text && text.match(wordMatchRegExp)) break;
-	}
+	let div = section.children[1].children[1].children[0].children[0];
 	
-	if(i>=len){	
-		console.log('getNameElementBig: nao achou o nome');
-		return null;
-	}
-	
-	let divs = sections[i].querySelectorAll('div');
-	wordMatchRegExp = /ngFJYWcfOsVGPNjdITAKzZejAMtnOXGfYwnXuQ/g;
-	len = divs.length;
-  
-	for(i=0;i<len;i++){
-			text = divs[i].className;
-			if(text && text.match(wordMatchRegExp)) break;
-	}
-	
-	if(i>len){	
-		console.log('getNameElementBig: falhou na div');
-		return null;
-	}
-	
-	const h1 = divs[i].querySelector("h1");
+	const h1 = div.querySelector("h1");
 	
 	if(!h1){
 		console.log('getNameElementBig: falhou na h1');
@@ -72,42 +49,16 @@ function getNameElementBig(sections)
 function getName(section)
 {
 	let h1 = getNameElementBig(section);
-	if(h1 == null) h1 = getNameElementSmall(section);
+	//if(h1 == null) h1 = getNameElementSmall(sections);
 	
 	return h1.textContent;
 }
 
-function getLocation(sections)
+function getLocation(section)
 {
-	let wordMatchRegExp = /artdeco-card EpYoKBnmDyhtoKVRsPnABnILWmuWoUHXYKw/g; // Regular expression
-	let len = sections.length;
-	let i,text;
-	
-	for(i = 0; i<len; i++){
-			text = sections[i].className;
-			if(text && text.match(wordMatchRegExp)) break;
-	}
-	
-	if(i>=len){	
-		console.log('getLocation: nao achou o location');
-		return null;
-	}
-	
-	let divs = sections[i].querySelectorAll('div');
-	wordMatchRegExp = /ngFJYWcfOsVGPNjdITAKzZejAMtnOXGfYwnXuQ mt2/g;
-	len = divs.length;
-  
-	for(i=0;i<len;i++){
-			text = divs[i].className;
-			if(text && text.match(wordMatchRegExp)) break;
-	}
-	
-	if(i>len){	
-		console.log('getLocation: falhou na div');
-		return null;
-	}
+	let div = section.children[1].children[1].children[2];
 		
-	const span = divs[i].querySelector("span");
+	const span = div.querySelector("span");
 	
 	if(!span){
 		console.log('getLocation: falhou no span');
@@ -117,23 +68,9 @@ function getLocation(sections)
 	return span.textContent.replace(/^\n\s+|\n\s+$/gm,'');
 }
 
-function getCompanyName(sections)
+function getCompanyName(section)
 {
-	let wordMatchRegExp = /artdeco-card EpYoKBnmDyhtoKVRsPnABnILWmuWoUHXYKw/g; // Regular expression
-	let len = sections.length;
-	let i,text;
-	
-	for(i = 0; i<len; i++){
-			text = sections[i].className;
-			if(text && text.match(wordMatchRegExp)) break;
-	}
-	
-	if(i>=len){	
-		console.log('getCompanyName: nao achou a empresa');
-		return null;
-	}
-	
-	const div1 = sections[i].querySelector(".pv-text-details__right-panel")
+	const div1 = section.querySelector(".pv-text-details__right-panel")
 	
 	if(!div1){	
 		console.log('getCompanyName: falhou na div1');
@@ -381,14 +318,14 @@ function addProfile()
 	//console.log(section);
 		
 	data.action = "add_profile";
-	data.name = getName(section);
-	data.company = getCompanyName(section);
+	data.name = getName(section[0]);
+	data.company = getCompanyName(section[0]);
 	if(data.company == null){
 			data.company = getCompanyName_v1(section);
 	}
 	data.company_profile = getCompanyProfile(section); 
 	data.position = getCompanyPosition(section);
-	data.location = getLocation(section);
+	data.location = getLocation(section[0]);
 	data.profile = window.location.href;
 			
 	fillContact(data);	
