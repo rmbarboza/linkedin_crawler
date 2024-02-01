@@ -1,6 +1,9 @@
 # linkedin_crawler
 Linkedin crawler to collect user profiles data, such as name, organization and current role.
 
+The crawler works as a Chrome extension.
+Tested in Google Chrome and Microsoft Edge.
+
 Keep in mind that Linkedin changes its layout from time to time so the extension may stop working and a new extension version must be released.
 
 Let me know if it happens to you and you if you have any ideas to improve this tool. =)
